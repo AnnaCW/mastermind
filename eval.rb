@@ -1,5 +1,11 @@
 class Eval_guess
 
+  attr_reader :seq
+  attr_reader :guess
+  attr_reader :guess_counter
+  attr_reader :correct_positions
+  attr_reader :correct_elements
+
   def initialize(seq, guess, guess_counter)
     @seq = seq
     @guess = guess
@@ -15,10 +21,8 @@ class Eval_guess
   def eval_valid_guess_positions
     i = 0
     @correct_positions = 0
-    # correct_array = []
     while i < @guess.length
       if @seq[i] == @guess[i]
-      # correct_array[i] = @guess[i]
         @correct_positions += 1
       end
       i += 1
@@ -26,7 +30,7 @@ class Eval_guess
     @correct_positions
   end
 
-  def eval_valid_guess_elements
+def eval_valid_guess_elements
     @g_array = []
     @s_array = []
     @correct_elements = 0
@@ -39,81 +43,32 @@ class Eval_guess
       @s_array << s_color
     end
 
-    @g_array.each do |i|
-      x = 0
-      if i == @s_array[x]
-        match(i, x)
-      else
-        x += 1 while x < @s_array.length end
-        match(i, x)
+    @g_array.each do |g|
+      if g == @s_array[0]
+        @s_array[0] = nil
+        @g_array[@g_array.index(g)] = nil
+        @correct_elements += 1
+
+    elsif g == @s_array[1]
+        @s_array[1] = nil
+        @g_array[@g_array.index(g)] = nil
+        @correct_elements += 1
+
+    elsif g == @s_array[2]
+        @s_array[2] = nil
+        @g_array[@g_array.index(g)] = nil
+        @correct_elements += 1
+
+      elsif g == @s_array[3]
+          @s_array[3] = nil
+          @g_array[@g_array.index(g)] = nil
+          @correct_elements += 1
       end
+    end
   end
-
-  def match(i, x)
-    @g_array.delete(i)
-    @s_array.delete_at(x)
-    @correct_elements += 1
-  end
-
-  # def eval_valid_guess_elements
-  #   total = 0
-  #   x = @seq
-  #   @guess.each do |color|
-  #     x.each do |i|
-  #       y = x.index(i)
-  #         if color == i
-  #           x.delete_at(y)
-  #           total += 1
-  #         end
-  #     end
-  #   end
-  #   @correct_elements = total
-  # end
 
   def feedback
-    p "seq is #{@seq}"
-    puts "#{@guess} has #{@correct_elements} correct elements with #{@correct_positions} in the correct position(s)."
-    p "You have taken #{@guess_counter} guess(es)."
-    p "Guess again!"
+    Instructions.new.feedback_message(guess, correct_elements, correct_positions, guess_counter)
   end
 
 end
-
-# class Eval_Initial_Input
-#
-#   def guess
-#     puts 'guess'
-#       guess = gets.chomp
-#     end
-#
-#   def win?
-#     if guess == seq
-#         true
-#     end
-#
-#   def play?
-#     if (guess == "p") || (guess == "play")
-#         true
-#     end
-#
-#   def cheat?
-#     if (guess == "c") || (guess == "cheat")
-#         true
-#     end
-#
-#   def instructions?
-#     if (guess == "i") || (guess == "instructions")
-#       true
-#     end
-#
-#   def quit?
-#     if (guess == "q") || (guess == "quit")
-#       true
-#     end
-# end
-
-
-# else
-#   length?
-# end
-# end
