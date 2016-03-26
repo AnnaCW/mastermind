@@ -9,29 +9,31 @@ class Play
     @guess_counter = 0
     beginner_colors = ["r", "g", "b", "y", "r", "g", "b", "y", "r", "g", "b", "y", "r", "g", "b", "y"]
     @seq = beginner_colors.sample(num)
+    Instructions.new.play_instructions_beginner
     obtain_guess
   end
 
   def obtain_guess
-    puts "Enter your guess."
-      #add basic instructions
-    @guess = gets.downcase.chomp.split(//)
-    @guess_counter += 1
+    Instructions.new.enter_guess
+    @input = gets.downcase.chomp
+    @guess = @input.split(//)
     eval_game_input
   end
 
   def eval_game_input
     case
     when @guess == @seq
-      puts 'win'
-    when (@guess == "p") || (@guess == "play")
-      puts 'play'
-    when (@guess == "c") || (@guess == "cheat")
-      puts 'cheat'
-    when (@guess == "i") || (@guess == "instructions")
+      @guess_counter += 1
+      puts "You win!!"
+    when (@input == "p") || (@input == "play")
+      Play.new
+    when (@input == "c") || (@input == "cheat")
+      Instructions.new.cheater(seq)
+      StartMenu.new
+    when (@input == "i") || (@input == "instructions")
       Instructions.game_instructions
-    when (@guess == "q") || (@guess == "quit")
-      exit
+    when (@input == "q") || (@input == "quit")
+      Exit.new
     else
       eval_length
     end
@@ -55,10 +57,11 @@ class Play
   def eval_chars
     @guess.each do |char|
       if (char == "r") || (char == "y") || (char == "g") || (char == "b")
+        @guess_counter += 1
         Eval_guess.new(seq, guess, guess_counter).guess_checker
         obtain_guess
       else
-        puts "Invalid guess. Please try again."
+        Instructions.new.invalid_guess
         obtain_guess
       end
     end
