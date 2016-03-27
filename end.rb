@@ -1,8 +1,8 @@
+
 class End
 
-  def end
-    p "Congratulations! You guessed the sequence #{seq} in #{num_guesses} over #{num_minutes}, #{num_seconds}.
-    Do you want to (p)lay again or (q)uit?"
+  def end(seq, guess_counter, elapsed_time)
+    Instructions.new.end_message(seq, guess_counter, elapsed_time)
     @end_input = gets.downcase.chomp
     eval_end_input
   end
@@ -18,13 +18,8 @@ class End
 end
 
 class Exit
-
   def initialize
     puts "Exiting Mastermind."
     exit
   end
 end
-
-
-# Do you want to (p)lay again or (q)uit?
-# If they enter 'p' or 'play' then restart the game. 'q' or 'quit' ends the game.
