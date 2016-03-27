@@ -4,12 +4,14 @@ class Play
   attr_reader :guess_counter
   attr_reader :correct_positions
   attr_reader :correct_elements
+  attr_reader :elapsed_time
 
   def initialize(num=4)
     @guess_counter = 0
     beginner_colors = ["r", "g", "b", "y", "r", "g", "b", "y", "r", "g", "b", "y", "r", "g", "b", "y"]
     @seq = beginner_colors.sample(num)
     Instructions.new.play_instructions_beginner
+    p @seq
     obtain_guess
   end
 
@@ -17,6 +19,7 @@ class Play
     Instructions.new.enter_guess
     @input = gets.downcase.chomp
     @guess = @input.split(//)
+    @t1 = Time.now
     eval_game_input
   end
 
@@ -24,7 +27,9 @@ class Play
     case
     when @guess == @seq
       @guess_counter += 1
-      puts "You win!!"
+      @t2 = Time.now
+      @elapsed_time = @t2 - @t1
+      End.new.end(seq, guess_counter, elapsed_time)
     when (@input == "p") || (@input == "play")
       Play.new
     when (@input == "c") || (@input == "cheat")
