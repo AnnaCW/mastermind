@@ -12,7 +12,6 @@ class Play
     @seq = beginner_colors.sample(num)
     Instructions.new.play_instructions_beginner
     @t1 = Time.now
-    seq
     obtain_guess
   end
 
