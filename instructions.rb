@@ -40,7 +40,7 @@ class Instructions
   def end_message(seq, guess_counter, elapsed_time)
     min = (elapsed_time / 60).round
     sec = (elapsed_time % 60).round
-    puts "Congratulations! You guessed the sequence #{seq.join.upcase} in #{guess_counter} guess over #{min} minutes, #{sec} seconds.
+    puts "Congratulations! You guessed the sequence #{seq.join.upcase} in #{guess_counter} guess(es) over #{min} minutes, #{sec} seconds.
     Do you want to (p)lay again or (q)uit?"
   end
 
