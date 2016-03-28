@@ -29,7 +29,3 @@ class StartMenu
           Instructions.new.invalid_input
         end
   end
-
-
-  # If they enter i or instructions they should be presented with a short explanation of how the game is played.
-  # If they enter q or quit then the game should exit
