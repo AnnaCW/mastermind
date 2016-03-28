@@ -11,7 +11,6 @@ class Play
     beginner_colors = ["r", "g", "b", "y", "r", "g", "b", "y", "r", "g", "b", "y", "r", "g", "b", "y"]
     @seq = beginner_colors.sample(num)
     Instructions.new.play_instructions_beginner
-    p @seq
     obtain_guess
   end
 
