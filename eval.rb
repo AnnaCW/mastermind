@@ -1,5 +1,4 @@
 class Eval_guess
-
   attr_reader :seq
   attr_reader :guess
   attr_reader :guess_counter
@@ -20,49 +19,41 @@ class Eval_guess
 
   def eval_valid_guess_positions
     i = 0
-    @correct_positions = 0
-    while i < @guess.length
-      if @seq[i] == @guess[i]
-        @correct_positions += 1
+    correct_positions = 0
+    while i < guess.length
+      if seq[i] == guess[i]
+        correct_positions += 1
       end
       i += 1
     end
-    @correct_positions
+    correct_positions
   end
 
 def eval_valid_guess_elements
-    @g_array = []
-    @s_array = []
-    @correct_elements = 0
+  correct_elements = 0
+  s_array = seq.map
+  g_array = guess.map
 
-    @guess.each do |g_color|
-      @g_array << g_color
-    end
+    g_array.each do |g|
+      if g == s_array[0]
+        s_array[0] = nil
+        g_array[g_array.index(g)] = nil
+        correct_elements += 1
 
-    @seq.each do |s_color|
-      @s_array << s_color
-    end
+    elsif g == s_array[1]
+        s_array[1] = nil
+        g_array[g_array.index(g)] = nil
+        correct_elements += 1
 
-    @g_array.each do |g|
-      if g == @s_array[0]
-        @s_array[0] = nil
-        @g_array[@g_array.index(g)] = nil
-        @correct_elements += 1
+    elsif g == s_array[2]
+        s_array[2] = nil
+        g_array[g_array.index(g)] = nil
+        correct_elements += 1
 
-    elsif g == @s_array[1]
-        @s_array[1] = nil
-        @g_array[@g_array.index(g)] = nil
-        @correct_elements += 1
-
-    elsif g == @s_array[2]
-        @s_array[2] = nil
-        @g_array[@g_array.index(g)] = nil
-        @correct_elements += 1
-
-      elsif g == @s_array[3]
-          @s_array[3] = nil
-          @g_array[@g_array.index(g)] = nil
-          @correct_elements += 1
+      elsif g == s_array[3]
+          s_array[3] = nil
+          g_array[g_array.index(g)] = nil
+          correct_elements += 1
       end
     end
   end
